@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /*background-color: #ffffff;*/
+}
+
+body {
+    background-color: #ffffff;
+}
+li,a{
+    font-family: "Montserrat",sans-serif;
+    font-weight: 500;
+    color: #92572f;
+    text-decoration: none;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 20px 10%;
+    background-color: rgb(242, 218, 85, 0.69); 
+}
+.logo{
+    cursor: pointer;
+    order: 3;
+    margin-left: auto;
+    height:80px;
+    background-color: transparent !important;
+}
+.yh{
+    color: #92572f;
+    font-size: 18px;
+    order: 1;
+    margin-left: auto;
+}
+.nav_links{
+    list-style: none;
+    margin-top: 15px;
+}
+
+.nav_links li{
+    display: inline-block;
+    padding: 0px 20px;
+    background-color: transparent !important; 
+}
+
+.nav_links li:nth-child(2){
+    text-decoration: underline;
+}
+
+.nav_links li a{
+    font-size: 22px;
+    transition: all 0.3s ease 0s;
+    background-color: transparent !important; 
+}
+
+.nav_links li a:hover{
+    color: #3d1c06;
+}
+
+ .contact_button{
+    padding: 9px 25px;
+    background-color: #92572f !important;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    color:rgb(255, 241, 165);
+    font-size: 18px;
+ }
+
+ .contact_button:hover{
+    background-color: #3d1c0671;
+ }
+ .cta{
+    color: rgba(255, 242, 168, 0.897); 
+}
+.cta:hover{
+    color: #3d1c06;
+}
+.date_button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #92572f !important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    color:rgb(255, 241, 165);
+    font-size: 12px;
+    box-shadow: 0 3px 0 #92572fb0;  
+  }
+  
+.date_button:active {
+    transform: translateY(3px); /* 下移距离等于阴影厚度 */
+    box-shadow: 0 1px 0 #92572fe3 ;
+}
+
+
+/* .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 999;
+} */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f8e89fe7;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    z-index: 1000;
+    min-width: 320px;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+.modal-content h3 {
+    margin: auto;
+    margin-top: 15px;
+    color: #2d3748;
+    font-size: 36px;
+    font-weight: 600;
+    padding: 18px;
+}
+
+#newNickname {
+    margin: auto;
+    width: 85%;
+    padding: 15px;
+    margin-bottom: 1.5rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+#newNickname:focus {
+    outline: none;
+    border-color: #eecb57;
+    box-shadow: 0 0 0 3px rgba(192, 165, 44, 0.24);
+}
+
+.modal-content div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding:20px;
+    border-radius: 8px;
+}
+
+.modal-content button {
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.modal-content button:first-child {
+    background-color: #f7fafc;
+    color: #2d3748;
+    border: 1px solid #e2e8f0;
+    font-size: 20px;
+}
+
+.modal-content button:first-child:hover {
+    background-color: #edf2f7;
+}
+
+.modal-content button:last-child {
+    background-color: #eecb57;
+    color: white;
+    font-size: 20px;
+}
+
+.modal-content button:last-child:hover {
+    background-color: #eecb57;
+    transform: translateY(-1px);
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+.yh1 a:hover{
+    color: #3d1c06;
+}

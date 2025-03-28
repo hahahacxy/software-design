@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modified Electricity Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 800px;height:600px;"></div>
+    <script>
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        option = {
+            title: {
+                text: 'Distribution of Electricity',
+                subtext: 'Fake Data'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} W'
+                },
+                axisPointer: {
+                    snap: true
+                }
+            },
+            visualMap: {
+                show: false,
+                dimension: 0,
+                pieces: [
+                    { lte: 6, color: 'green' },
+                    { gt: 6, lte: 8, color: 'red' },
+                    { gt: 8, lte: 14, color: 'green' },
+                    { gt: 14, lte: 17, color: 'red' },
+                    { gt: 17, color: 'green' }
+                ]
+            },
+//     visualMap: {
+//     type: 'piecewise',
+//     show: false,
+//     dimension: 0,
+//     seriesIndex: 0,
+//     pieces: [
+//       {
+//         gt: 1,
+//         lt: 3,
+//         color: 'rgba(0, 0, 180, 0.4)'
+//       },
+//       {
+//         gt: 5,
+//         lt: 7,
+//         color: 'rgba(0, 0, 180, 0.4)'
+//       }
+//     ]
+//   },
+        series: [{
+            name: 'Electricity',
+            type: 'line',
+            smooth: true,
+            data: [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400],
+        
+            markArea: {
+                itemStyle: {
+                color: 'rgba(255, 173, 177, 0.4)'
+                },
+            data: []
+        },
+    // 将markLine作为series的属性
+            markLine: {
+            data: [
+            { yAxis: 400, lineStyle: { type: 'dashed', color: 'red' } },
+            { yAxis: 600, lineStyle: { type: 'dashed', color: 'blue' } }
+        ]
+    }
+}]
+        };
+
+        // 生成动态标记区域
+        const xData = option.xAxis.data;
+        const seriesData = option.series[0].data;
+        const markAreas = [];
+        for (let i = 0; i < seriesData.length - 1; i++) {
+            const y = seriesData[i];
+            if ((y >= 0 && y <= 400) || y > 600) {
+                markAreas.push([
+                    { xAxis: xData[i] },
+                    { xAxis: xData[i + 1] }
+                ]);
+            }
+        }
+        option.series[0].markArea.data = markAreas;
+
+        option && myChart.setOption(option);
+    </script>
+</body>
+</html>

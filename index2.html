@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!-- 声明文档类型为HTML5 -->
+<html>
+<head>
+    <!-- 设置字符编码为UTF-8，支持中文显示 -->
+    <meta charset="UTF-8">
+    <!-- 页面标题 -->
+    <title>多用户实时监测</title>
+    
+    <!-- 引入Bootstrap样式（用于美化页面布局） -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入ECharts图表库（用于绘制波形图） -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 页面主体内容容器，使用Bootstrap的间距样式 -->
+    <div class="container mt-4">
+        <!-- 响应式网格布局（1列手机，3列电脑） -->
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="userContainer">
+            <!-- 用户区块将用JavaScript动态生成 -->
+        </div>
+    </div>
+
+    <script>
+    // 主初始化函数（异步函数）
+    async function initDashboard() {
+        // 获取用户容器DOM元素
+        const container = document.getElementById('userContainer');
+        
+        // 获取初始数据（从服务器API）
+        const initRes = await fetch('/api/get_data.php');
+        const initData = await initRes.json();
+        
+        // 提取用户列表（假设返回数据格式：{用户1:数据, 用户2:数据}）
+        const users = Object.keys(initData);
+
+        // 遍历所有用户，为每个用户创建界面元素
+        users.forEach((user, index) => {
+            // 生成用户ID（从1开始）
+            const userId = index + 1;
+            
+            // 创建用户卡片容器（使用Bootstrap的栅格系统）
+            const chartDiv = document.createElement('div');
+            chartDiv.className = 'col';  // 栅格列样式
+            chartDiv.innerHTML = `
+                <!-- 波形图容器（固定高度） -->
+                <div id="waveChart${userId}" style="height:300px;"></div>
+                
+                <!-- 用户信息卡片 -->
+                <div class="card mt-2">
+                    <div class="card-body">
+                        <h5 class="card-title">用户${user}</h5>  <!-- 用户名 -->
+                        <p id="spo2Value${userId}" class="fs-5">血氧：--%</p>  <!-- 血氧值显示 -->
+                        <!-- 警报框（默认隐藏） -->
+                        <div id="alertBox${userId}" class="alert alert-danger d-none"></div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(chartDiv);  // 添加到页面
+
+            // 初始化ECharts实例
+            const chart = echarts.init(document.getElementById(`waveChart${userId}`));
+            // 设置图表初始配置
+            chart.setOption({
+    title: { text: `用户${user} 的血氧波形图` },
+    xAxis: { type: 'time' },
+    yAxis: { min: 90, max: 105 },
+    series: [{ 
+        type: 'line',
+        smooth: true,
+        data: [],
+        // ▼▼▼ 新增关键配置 ▼▼▼
+        animation: false,          // 关闭过度动画
+        progressive: 1000           // 大数据渲染优化
+    }]
+});
+            
+            // 存储图表引用以便后续更新
+            window.charts = window.charts || [];  // 初始化数组
+            window.charts[userId] = chart;        // 按用户ID存储
+        });
+
+        // 设置定时器，每0.2秒更新一次数据
+        setInterval(fetchData, 200);
+    }
+
+    // 数据更新函数（异步）
+    async function fetchData() {
+        // 获取最新数据
+        const res = await fetch('/api/get_data.php');
+        const data = await res.json();
+        
+        // 遍历所有用户数据
+        Object.entries(data).forEach(([userName, userData], index) => {
+            const userId = index + 1;
+            
+            // 更新对应图表
+            if (window.charts[userId]) {
+                window.charts[userId].setOption({
+                    series: [{
+                        // 转换数据格式为 [ [时间戳, 血氧值], ... ]
+                        data: userData.map(item => [
+                            item.timestamp,
+                            item.spo2
+                        ])
+                    }]
+                });
+            }
+
+            // 更新数值显示和警报状态
+            if (userData.length > 0) {
+                const latest = userData[userData.length - 1];  // 获取最新数据点
+                const spo2Element = document.getElementById(`spo2Value${userId}`);
+                const alertBox = document.getElementById(`alertBox${userId}`);
+                
+                // 更新血氧值显示
+                spo2Element.textContent = `血氧：${latest.spo2}%`;
+                
+                // 处理警报状态
+                if (latest.status === 'abnormal') {
+                    alertBox.classList.remove('d-none');  // 显示警报框
+                    alertBox.textContent = `异常警告！当前血氧：${latest.spo2}%`;
+                } else {
+                    alertBox.classList.add('d-none');     // 隐藏警报框
+                }
+            }
+        });
+    }
+
+    // 启动初始化流程
+    initDashboard();
+    </script>
+    <hr>
+    <div style="border-top: 1px solid #000000;"></div>
+</body>
+</html>

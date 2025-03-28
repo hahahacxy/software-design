@@ -1,0 +1,60 @@
+body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { display: flex; justify-content: space-between; max-width: 1000px; margin:  auto; }
+        .left-section, .right-section { padding: 20px; background: #f9f9f9; border-radius: 10px; }
+        .left-section { flex: 1; margin-right: 10px; }
+        .right-section { flex: 1; }
+        h2 { text-align: center; }
+        label { font-weight: bold; display: block; margin: 10px 0 5px; }
+        input, select { width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #92572fda; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
+        button:hover { background: #552709de; }
+        .error { color: red; text-align: center; }
+        .success { color: #92572f; text-align: center; }
+        .checkbox-group { max-height: 150px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; background: #fff; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        table, th, td { border: 1px solid #ccc; text-align: center; }
+        th, td { padding: 8px; }
+        th { background: #ddd; }
+
+        
+.logo{cursor: pointer;height: 100px;order: 3;margin-left: auto;}
+.cta button {
+            padding: 9px 25px;
+    background-color: rgba(0, 136, 169, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+        }
+.cta button:hover { background: #c44125; }
+
+.title {
+  font-size: 36px;        /* 调整字体大小 */
+}
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  padding: 20px 10%;
+  background-color: rgb(242, 218, 85, 0.69); 
+}
+.logo{
+  cursor: pointer;
+  order: 3;
+  margin-left: auto;
+  height:80px;
+  background-color: transparent !important;
+}
+li,a{
+  font-family: "Montserrat",sans-serif;
+  font-weight: 500;
+  color: #92572f;
+  text-decoration: none;
+
+}
+
+h1{
+  font-size: 36px;
+  color:#92572f;
+  /* margin-left: 200px; */
+}

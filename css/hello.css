@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: 'yht';
+    src: url(youshe.ttf);
+}
+    .box{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: rgba(242, 218, 85, 0.69);
+    }
+    .login{
+        display: flex;
+        width: 850px;
+        height: 450px;
+        border-radius: 6px;
+        background-color: rgba(255,255,255,0.3);
+    }
+    .login img{
+        width: 500px;
+        border-radius: 6px;
+    }
+    form{
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        width: 300px;
+        justify-content: center;
+    }
+    form h3{
+        font-family: 'yht';
+        font-size: 35px;
+        font-weight: 400;
+        color: #6a3312;
+        margin-bottom: 20px;
+    }
+    form h5{
+        font-size: 15px;
+        font-weight: 400;
+        color: #95684c;
+        margin-bottom: 6px;
+    }
+    
+    form div{
+        padding: 3px; 
+        border: none;
+        border-radius: 3px;
+        width: 100%;
+        margin-top: 10px;
+    }
+    form button{
+        border-radius: 3px;
+        cursor: pointer;
+        display: block;
+        width: 120px;
+        height: 35px;
+        color: aliceblue;
+        font-size: 14px;
+        background-color: rgba(215, 143, 8, 0.69);
+        margin: auto;
+        border: none;
+    }
+
+  

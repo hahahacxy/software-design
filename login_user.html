@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/login_user.css">
+</head>
+<body>
+    <div class="box">
+        <div class="login">
+            <img src="images/NJUPT.png" alt="NJUPT"">
+            <form action="api/login_user.php" method="POST">
+                <h3>用户登录</h3>
+                <input type="text" name="username" placeholder="请输入您的账号" required>
+                <input type="password" name="password" placeholder="请输入您的密码" required>
+                <div>
+                    <button type="submit"> 登录 </button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</body>
+</html>

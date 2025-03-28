@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/hello.css">
+</head>
+<body>
+    <div class="box">
+        <div class="login">
+            <img src="images/NJUPT.png" alt="">
+            <form >
+                <h3> &nbsp; 欢迎登录<br>  &nbsp;    SpO2-Guard</h3>
+                <h5>请选择您的登录身份：</h5>
+                
+                <div>
+                    <button type="button" onclick="chooseWho1()"> 用户 </button>
+                </div>
+                <div>
+                    <button type="button" onclick="chooseWho2()"> 管理员 </button>
+                </div>
+                <div>
+                    <button type="button" onclick="chooseWho3()"> 监测员 </button>
+                </div>
+
+                <div >
+                    <a href="register.php" style="text-decoration: underline;color: #6a3312;padding-left: 130px;">注册</a>
+                </div>
+            </form>
+        </div>
+    </div>
+   <script>
+    function chooseWho1(){
+        window.location.href = "login_user.php"
+    }
+    function chooseWho2(){
+        window.location.href = "login_admin.php"
+    }
+    function chooseWho3(){
+        window.location.href = "login_supervisor.php"
+    }
+   </script>
+</body>
+</html>
